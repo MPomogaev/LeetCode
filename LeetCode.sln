@@ -3,7 +3,19 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.11.35312.102
 MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Candy", "Candy\Candy.csproj", "{457006EA-B1A5-4449-A53B-2FD29E3911BA}"
+EndProject
 Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{457006EA-B1A5-4449-A53B-2FD29E3911BA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{457006EA-B1A5-4449-A53B-2FD29E3911BA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{457006EA-B1A5-4449-A53B-2FD29E3911BA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{457006EA-B1A5-4449-A53B-2FD29E3911BA}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection

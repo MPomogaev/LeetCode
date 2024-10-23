@@ -5,7 +5,9 @@ VisualStudioVersion = 17.11.35312.102
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Candy", "Candy\Candy.csproj", "{457006EA-B1A5-4449-A53B-2FD29E3911BA}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SubstringWithConcatenationOfAllWords", "SubstringWithConcatenationOfAllWords\SubstringWithConcatenationOfAllWords.csproj", "{62AC9116-4637-413F-9F07-B4E4D481904F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SubstringWithConcatenationOfAllWords", "SubstringWithConcatenationOfAllWords\SubstringWithConcatenationOfAllWords.csproj", "{62AC9116-4637-413F-9F07-B4E4D481904F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BasicCalculator", "BasicCalculator\BasicCalculator.csproj", "{909BB956-AFAD-462C-91EB-B63422FDC27E}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -21,6 +23,10 @@ Global
 		{62AC9116-4637-413F-9F07-B4E4D481904F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{62AC9116-4637-413F-9F07-B4E4D481904F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{62AC9116-4637-413F-9F07-B4E4D481904F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{909BB956-AFAD-462C-91EB-B63422FDC27E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{909BB956-AFAD-462C-91EB-B63422FDC27E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{909BB956-AFAD-462C-91EB-B63422FDC27E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{909BB956-AFAD-462C-91EB-B63422FDC27E}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

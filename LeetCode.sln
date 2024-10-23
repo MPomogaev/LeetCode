@@ -9,6 +9,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SubstringWithConcatenationO
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BasicCalculator", "BasicCalculator\BasicCalculator.csproj", "{909BB956-AFAD-462C-91EB-B63422FDC27E}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IPO", "IPO\IPO.csproj", "{6C77D8AB-C98D-45EF-9853-79E706CAA814}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -27,6 +29,10 @@ Global
 		{909BB956-AFAD-462C-91EB-B63422FDC27E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{909BB956-AFAD-462C-91EB-B63422FDC27E}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{909BB956-AFAD-462C-91EB-B63422FDC27E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6C77D8AB-C98D-45EF-9853-79E706CAA814}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6C77D8AB-C98D-45EF-9853-79E706CAA814}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6C77D8AB-C98D-45EF-9853-79E706CAA814}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6C77D8AB-C98D-45EF-9853-79E706CAA814}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

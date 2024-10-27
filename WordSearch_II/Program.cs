@@ -1,4 +1,6 @@
-﻿int m = int.Parse(Console.ReadLine());
+﻿using System.Text;
+
+int m = int.Parse(Console.ReadLine());
 int n = int.Parse(Console.ReadLine());
 char[][] board = new char[m][];
 for (int i = 0; i < m; ++i) {
@@ -22,72 +24,107 @@ public struct Point {
     }
 }
 
+public class Trie {
+    public TrieNode root = new();
+    public Trie(LinkedList<string> words) {
+        foreach (var word in words)
+            AddWord(word);
+    }
+
+    public void AddWord(string word) {
+        var current = root;
+        foreach (var ch in word) {
+            var children = current.Children;
+            if (children.TryGetValue(ch, out TrieNode child))
+                current = child;
+            else {
+                current = new();
+                children[ch] = current;
+            }
+        }
+        current.isWordNode = true;
+    }
+}
+
+public class TrieNode {
+    public bool isWordNode = false;
+    public bool isOnBoard = false;
+    public bool allChildrenOnBoard = false;
+    public Dictionary<char, TrieNode> Children = new();
+}
+
 public class Solution {
     public List<Point> visited = new();
     public List<string> answer = new();
     public HashSet<string> reversed = new();
     public LinkedList<string> words;
-    
+    public Trie trie;
     public char[][] board;
     int n, m;
 
-    public void ConcatLinkedLists(LinkedList<string> to, LinkedList<string> from) {
-        var cur = from.First;
-        while(cur != null) {
-            var next = cur.Next;
-            from.Remove(cur);
-            to.AddLast(cur);
-            cur = next;
+    public string ReverseString(string str) {
+        return new string(str.Reverse().ToArray());
+    }
+
+    public void GetWordsOnBoard(StringBuilder word, TrieNode node) {
+        foreach (var child in node.Children) {
+            word.Append(child.Key);
+            if (child.Value.isOnBoard) {
+                string wordStr = word.ToString();
+                if (reversed.Contains(wordStr))
+                    answer.Add(ReverseString(wordStr));
+                else
+                    answer.Add(wordStr);
+            }
+            GetWordsOnBoard(word, child.Value);
+            word.Remove(word.Length - 1, 1);
         }
     }
 
-    public void CheckPosition(Point point, LinkedList<string> wordsToCheck, int chPosition) {
+    public void CheckPosition(Point point, TrieNode trieNode, int chPosition) {
+        if (trieNode.Children.Count == 0 || trieNode.allChildrenOnBoard)
+            return;
+
         int i = point.x, j = point.y;
         char ch = board[i][j];
-        LinkedList<string> missingWords = new();
-        for(var current = wordsToCheck.First; current != null;) {
-            var next = current.Next;
-            var word = current.Value;
-            if (word[chPosition] != ch) {
-                wordsToCheck.Remove(current);
-                missingWords.AddLast(current);
-            } else if (chPosition == word.Length - 1) {
-                if (reversed.Contains(word))
-                    answer.Add(new string(word.Reverse().ToArray()));
-                else answer.Add(word);
-                wordsToCheck.Remove(current);
-            }
-            current = next;
+        if (!trieNode.Children.TryGetValue(ch, out TrieNode nextNode))
+            return;
+
+        var CheckIfNodeHasAllChildrenOnBoard = (TrieNode node) => {
+            node.allChildrenOnBoard = true;
+            foreach (var child in node.Children)
+                if (!child.Value.allChildrenOnBoard) {
+                    node.allChildrenOnBoard = false;
+                    break;
+                }
+        };
+
+        if (nextNode.isWordNode) {
+            nextNode.isOnBoard = true;
+            CheckIfNodeHasAllChildrenOnBoard(nextNode);
         }
 
-        if (wordsToCheck.Count != 0) {
-            visited.Add(point);
-            int nextPosition = chPosition + 1;
+        visited.Add(point);
+        int nextPosition = chPosition + 1;
 
-            var CheckNextPosition = (Point p) => {
-                if (!visited.Contains(p))
-                    CheckPosition(p, wordsToCheck, nextPosition);
-            };
+        var CheckNextPosition = (Point p) => {
+            if (!visited.Contains(p))
+                CheckPosition(p, nextNode, nextPosition);
+        };
 
-            if (i > 0)
-                CheckNextPosition(new(i - 1, j));
-            if (wordsToCheck.Count != 0 && i < m - 1 )
-                CheckNextPosition(new(i + 1, j));
-            if (wordsToCheck.Count != 0 && j > 0)
-                CheckNextPosition(new(i, j - 1));
-            if (wordsToCheck.Count != 0 && j < n - 1)
-                CheckNextPosition(new(i, j + 1));
-            visited.Remove(point);
-        }
-        ConcatLinkedLists(wordsToCheck, missingWords);
+        if (i > 0)
+            CheckNextPosition(new(i - 1, j));
+        if (i < m - 1)
+            CheckNextPosition(new(i + 1, j));
+        if (j > 0)
+            CheckNextPosition(new(i, j - 1));
+        if (j < n - 1)
+            CheckNextPosition(new(i, j + 1));
+        visited.Remove(point);
+        CheckIfNodeHasAllChildrenOnBoard(trieNode);
     }
 
-    public IList<string> FindWords(char[][] _board, string[] _words) {
-        board = _board;
-        words = new(_words);
-        m = _board.Length;
-        n = _board[0].Length;
-
+    public void SiftWords() {
         var countChar = (Dictionary<char, int> dict, char ch) => {
             if (dict.ContainsKey(ch))
                 dict[ch]++;
@@ -103,7 +140,7 @@ public class Solution {
 
         Dictionary<char, int> wordCharFrequency = new();
         var current = words.First;
-        while(current != null) {
+        while (current != null) {
             var next = current.Next;
             string word = current.Value;
             foreach (var ch in word)
@@ -117,9 +154,9 @@ public class Solution {
                 isRemoved = true;
                 break;
             }
-            if (!isRemoved && 
+            if (!isRemoved &&
                 wordCharFrequency[word[0]] > wordCharFrequency[word[word.Length - 1]]) {
-                string reverse = new string(word.Reverse().ToArray());
+                string reverse = ReverseString(word);
                 words.AddAfter(current, reverse);
                 words.Remove(current);
                 reversed.Add(reverse);
@@ -127,13 +164,24 @@ public class Solution {
             wordCharFrequency.Clear();
             current = next;
         }
+    }
 
+    public IList<string> FindWords(char[][] _board, string[] _words) {
+        board = _board;
+        words = new(_words);
+        m = _board.Length;
+        n = _board[0].Length;
 
+        SiftWords();
 
-        for (int i = 0; i < m && words.Count != 0; ++i)
-            for (int j = 0; j < n && words.Count != 0; ++j)
-                CheckPosition(new Point(i, j), words, 0);
-            
+        trie = new(words);
+
+        for (int i = 0; i < m && !trie.root.allChildrenOnBoard; ++i)
+            for (int j = 0; j < n && !trie.root.allChildrenOnBoard; ++j)
+                CheckPosition(new Point(i, j), trie.root, 0);
+
+        GetWordsOnBoard(new StringBuilder(), trie.root);
+
         return answer;
     }
 }

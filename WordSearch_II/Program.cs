@@ -15,15 +15,6 @@ string[] words = Console.ReadLine().Split();
 foreach(var word in new Solution().FindWords(board, words))
     Console.WriteLine(word);
 
-public struct Point {
-    public int x;
-    public int y;
-    public Point(int x, int y) {
-        this.x = x;
-        this.y = y;
-    }
-}
-
 public class Trie {
     public TrieNode root = new();
     public Trie(LinkedList<string> words) {
@@ -54,7 +45,7 @@ public class TrieNode {
 }
 
 public class Solution {
-    public List<Point> visited = new();
+    public bool[][] visited;
     public List<string> answer = new();
     public HashSet<string> reversed = new();
     public LinkedList<string> words;
@@ -81,11 +72,10 @@ public class Solution {
         }
     }
 
-    public void CheckPosition(Point point, TrieNode trieNode, int chPosition) {
+    public void CheckPosition(int i, int j, TrieNode trieNode, int chPosition) {
         if (trieNode.Children.Count == 0 || trieNode.allChildrenOnBoard)
             return;
 
-        int i = point.x, j = point.y;
         char ch = board[i][j];
         if (!trieNode.Children.TryGetValue(ch, out TrieNode nextNode))
             return;
@@ -104,23 +94,23 @@ public class Solution {
             CheckIfNodeHasAllChildrenOnBoard(nextNode);
         }
 
-        visited.Add(point);
+        visited[i][j] = true;
         int nextPosition = chPosition + 1;
 
-        var CheckNextPosition = (Point p) => {
-            if (!visited.Contains(p))
-                CheckPosition(p, nextNode, nextPosition);
+        var CheckNextPosition = (int i, int j) => {
+            if (!visited[i][j])
+                CheckPosition(i, j, nextNode, nextPosition);
         };
 
         if (i > 0)
-            CheckNextPosition(new(i - 1, j));
+            CheckNextPosition(i - 1, j);
         if (i < m - 1)
-            CheckNextPosition(new(i + 1, j));
+            CheckNextPosition(i + 1, j);
         if (j > 0)
-            CheckNextPosition(new(i, j - 1));
+            CheckNextPosition(i, j - 1);
         if (j < n - 1)
-            CheckNextPosition(new(i, j + 1));
-        visited.Remove(point);
+            CheckNextPosition(i, j + 1);
+        visited[i][j] = false;
         CheckIfNodeHasAllChildrenOnBoard(trieNode);
     }
 
@@ -171,6 +161,9 @@ public class Solution {
         words = new(_words);
         m = _board.Length;
         n = _board[0].Length;
+        visited = new bool[m][];
+        for (int i = 0; i < m; i++)
+            visited[i] = new bool[n];
 
         SiftWords();
 
@@ -178,7 +171,7 @@ public class Solution {
 
         for (int i = 0; i < m && !trie.root.allChildrenOnBoard; ++i)
             for (int j = 0; j < n && !trie.root.allChildrenOnBoard; ++j)
-                CheckPosition(new Point(i, j), trie.root, 0);
+                CheckPosition(i, j, trie.root, 0);
 
         GetWordsOnBoard(new StringBuilder(), trie.root);
 

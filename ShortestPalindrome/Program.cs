@@ -25,6 +25,7 @@ public class Solution {
     List<SymbolCount> compresed;
     Dictionary<char, int> leftPartSymbolsCounts = new();
     Dictionary<char, int> rightPartSymbolsCounts = new();
+    int compresedStringLength = 0;
     int differencesCount = 0;
     HashSet<char> differences = new();
     HashSet<char> changedSymbols = new();
@@ -50,7 +51,7 @@ public class Solution {
         
         rightEndSymbolIndex = compresed.Count() - 1;
         rightEndCountIndex = compresed[rightEndSymbolIndex].count;
-        int compresedStringLength = 2 * leftCompresedPartLength 
+        compresedStringLength = 2 * leftCompresedPartLength 
             + compresed[middleSymbolIndex].count;
         int num = length - compresedStringLength;
         while (num >= rightEndCountIndex) {
@@ -147,18 +148,24 @@ public class Solution {
             if (differencesCount == 0)
                 if (CheckPossition())
                     break;
-            int middleSymbolLengthChange = middleSymbolCount % 2;
-            int leftEndMoveCount = middleSymbolCount / 2;
-            rightPartSymbolsCounts[middleSymbol] += middleSymbolCount;
-            middleSymbolIndex--;
-            compressedMiddle = compresed[middleSymbolIndex];
-            middleSymbol = compressedMiddle.symbol;
-            middleSymbolCount = compressedMiddle.count;
-            middleSymbolLengthChange -= middleSymbolCount % 2;
-            leftPartSymbolsCounts[middleSymbol] -= middleSymbolCount;
-            changedSymbols.Add(middleSymbol);
-            leftEndMoveCount += DivisionByTwoCeiling(middleSymbolCount);
-            int rightEndMoveCount = leftEndMoveCount * 2 + middleSymbolLengthChange;
+            int rightEndMoveCount = 0;
+            int leftEndMoveCount = 0;
+            int middleSymbolLengthChange = 0;
+            do {
+                middleSymbolLengthChange += middleSymbolCount % 2;
+                leftEndMoveCount += middleSymbolCount / 2;
+                rightPartSymbolsCounts[middleSymbol] += middleSymbolCount;
+                middleSymbolIndex--;
+                compressedMiddle = compresed[middleSymbolIndex];
+                middleSymbol = compressedMiddle.symbol;
+                middleSymbolCount = compressedMiddle.count;
+                leftPartSymbolsCounts[middleSymbol] -= middleSymbolCount;
+                changedSymbols.Add(middleSymbol);
+                leftEndMoveCount += DivisionByTwoCeiling(middleSymbolCount);
+                middleSymbolLengthChange -= middleSymbolCount % 2;
+                rightEndMoveCount = leftEndMoveCount * 2 + middleSymbolLengthChange;
+            } while (s[0] != s[compresedStringLength - rightEndMoveCount - 1]);
+            compresedStringLength -= rightEndMoveCount;
             MoveRightEnd(rightEndMoveCount);
             UpdateDifferences();
         }

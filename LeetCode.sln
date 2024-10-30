@@ -13,9 +13,11 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "IPO", "IPO\IPO.csproj", "{6
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BinaryTreeMaximumPathSum", "BinaryTreeMaximumPathSum\BinaryTreeMaximumPathSum.csproj", "{64EE9F08-4950-4CB8-A491-477AC26EECF6}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WordLadder", "WordLadder\WordLadder.csproj", "{51F7CD9B-82F8-421B-9F5E-7A3AA746B476}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WordLadder", "WordLadder\WordLadder.csproj", "{51F7CD9B-82F8-421B-9F5E-7A3AA746B476}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WordSearch_II", "WordSearch_II\WordSearch_II.csproj", "{5B41213B-6995-4660-A6E7-35DE8113271D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WordSearch_II", "WordSearch_II\WordSearch_II.csproj", "{5B41213B-6995-4660-A6E7-35DE8113271D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ShortestPalindrome", "ShortestPalindrome\ShortestPalindrome.csproj", "{81E124B5-1079-4E64-A018-365E6D9687A5}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -51,6 +53,10 @@ Global
 		{5B41213B-6995-4660-A6E7-35DE8113271D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{5B41213B-6995-4660-A6E7-35DE8113271D}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{5B41213B-6995-4660-A6E7-35DE8113271D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{81E124B5-1079-4E64-A018-365E6D9687A5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{81E124B5-1079-4E64-A018-365E6D9687A5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{81E124B5-1079-4E64-A018-365E6D9687A5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{81E124B5-1079-4E64-A018-365E6D9687A5}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

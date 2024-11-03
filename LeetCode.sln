@@ -19,6 +19,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WordSearch_II", "WordSearch
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ShortestPalindrome", "ShortestPalindrome\ShortestPalindrome.csproj", "{81E124B5-1079-4E64-A018-365E6D9687A5}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TheSkylineProblem", "TheSkylineProblem\TheSkylineProblem.csproj", "{B8D5CD3C-113B-4970-A67F-5C00F3C1FE8A}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -57,6 +59,10 @@ Global
 		{81E124B5-1079-4E64-A018-365E6D9687A5}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{81E124B5-1079-4E64-A018-365E6D9687A5}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{81E124B5-1079-4E64-A018-365E6D9687A5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B8D5CD3C-113B-4970-A67F-5C00F3C1FE8A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B8D5CD3C-113B-4970-A67F-5C00F3C1FE8A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B8D5CD3C-113B-4970-A67F-5C00F3C1FE8A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B8D5CD3C-113B-4970-A67F-5C00F3C1FE8A}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
